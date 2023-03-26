@@ -6,8 +6,15 @@ const shapes = inquirer.prompt ([
     {
         type: 'input', 
         message: 'Write 3 charcters',
-        name: 'three'
-    }, 
+        name: 'three',
+        validate: function(input) {
+            if (input.length !== 3) {
+                return 'Please enter 3 characters'
+            } else {
+                return true
+            }
+        }
+    },
     
     {
         type: 'list', 
