@@ -1,6 +1,10 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+const {Shapes, Triangle, Square, Circle} = require('./lib/shapes')
 
+const makeSVG = () =>  {
+
+}
 
 const shapes = inquirer.prompt ([
     {
@@ -19,7 +23,14 @@ const shapes = inquirer.prompt ([
     {
         type: 'input', 
         message: 'Enter a colour name or Hexadecimal for the text',
-        name: 'text-colour'
+        name: 'text-colour',
+        validate: function(input) {
+            if (input.length === 0) {
+                return 'Please enter a colour'
+            } else {
+                return true
+            }
+        }
     },
     
     {
@@ -28,11 +39,19 @@ const shapes = inquirer.prompt ([
         choices: ['Triangle', 'Square', 'Circle'],
         name: 'shape'
     }, 
-    
+
     {
         type: 'input', 
         message: 'Enter a colour name or Hexadecimal for the shape',
-        name: 'colour'
+        name: 'colour',
+        validate: function(input) {
+            if (input.length === 0) {
+                return 'Please enter a colour'
+            } else {
+                return true
+            }
+        }
+        
     }
 
 ]).then(answers => {
