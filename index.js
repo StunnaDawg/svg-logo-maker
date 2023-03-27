@@ -1,26 +1,11 @@
 const inquirer = require('inquirer');
-const fs = require('fs');
-const {Shapes, Triangle, Square, Circle} = require('./lib/shapes')
+const {readFile, writeFile} = require('fs/promises');
+const {Shapes, Triangle, Square, Circle} = require('./lib/shapes');
+const fileName = 'mySVGLogo.svg'
+const filePath = './examples/' + fileName;
 
-const makeSVG = (answers) =>  {
-    const triangleSVG = new Triangle(answers.textColour, answers.colour, answers.text);
-    const circleSVG = new Circle(answers.textColour, answers.colour, answers.text);
-    const squareSVG = new Square(answers.textColour, answers.colour, answers.text);
-    if (answers.shape === 'Triangle') {
-        console.log(triangleSVG);
-    }
 
-    if (answers.shape === 'Circle') {
-        console.log(circleSVG);
-    }
-
-    if (answers.shape === 'Square') {
-        console.log(squareSVG);
-    }
-
-}
-
-const shapes = inquirer.prompt ([
+inquirer.prompt ([
     {
         type: 'input', 
         message: 'Write 3 charcters',
@@ -68,6 +53,62 @@ const shapes = inquirer.prompt ([
         
     }
 
-]).then(makeSVG)
+]).then((answers) => {
 
-shapes;
+    const inputSVG = {
+        shape: answers.shape,
+        textColour: answers.textColour,
+        text: answers.text,
+        colour: answers.colour
+    };
+
+    const jsonString = JSON.stringify(inputSVG);
+
+    writeFile('./data/inquirerInput.json', jsonString, (err) => {
+        if (err) throw err;
+        console.log('complete')
+    })
+})
+.then (() => {
+    const {Shapes, Triangle, Square, Circle} = require('./lib/shapes');
+    readFile('./data/inquirerInput.json', 'utf-8')
+    .then((json) => {
+        const svgData = JSON.parse(json);
+        let svgCreation;
+        if (svgData.shape === 'Triangle') {
+            svgCreation = new Triangle(
+                svgData.textColour, 
+                svgData.colour, 
+                svgData.text
+                );
+        }
+        if (svgData.shape === 'Circle') {
+            svgCreation = new Circle (
+                svgData.textColour, 
+                svgData.colour, 
+                svgData.text
+                );
+        }
+        if (svgData.shape === 'Square') {
+            svgCreation = new Square (
+                svgData.textColour, 
+                svgData.colour, 
+                svgData.text
+                );
+        }
+
+        const fileSVG = svgCreation.render()
+
+        return writeFile(filePath, fileSVG);
+    })
+    .then(() => {
+        console.log('Created SVG in the examples directory')
+    })
+
+})
+
+
+    
+    
+
+
