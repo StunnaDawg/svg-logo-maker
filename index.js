@@ -1,7 +1,6 @@
 const inquirer = require('inquirer');
 const {readFile, writeFile} = require('fs/promises');
-const {Shapes, Triangle, Square, Circle} = require('./lib/shapes');
-const fileName = 'mySVGLogo.svg'
+const fileName = 'logo.svg'
 const filePath = './examples/' + fileName;
 
 
