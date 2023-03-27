@@ -22,6 +22,9 @@ Upon downloading the application make sure you do the following:
 2. If the dependencies do not exist: run 'npm i inquirer' to download the latest version of inquirer and 'npm i jest' to run test
 3. run 'node index.js' to recieve the question prompts'
 
+## Demo
+Demo video link: https://watch.screencastify.com/v/OozwUt42Ln0QtsuXzcEa
+
 ## Dependencies
 
 - nodeJS: https://nodejs.org/en
