@@ -15,6 +15,12 @@ const shapes = inquirer.prompt ([
             }
         }
     },
+
+    {
+        type: 'input', 
+        message: 'Enter a colour name or Hexadecimal for the text',
+        name: 'text-colour'
+    },
     
     {
         type: 'list', 
@@ -22,9 +28,10 @@ const shapes = inquirer.prompt ([
         choices: ['Triangle', 'Square', 'Circle'],
         name: 'shape'
     }, 
+    
     {
         type: 'input', 
-        message: 'Enter a colour name or Hexadecimal',
+        message: 'Enter a colour name or Hexadecimal for the shape',
         name: 'colour'
     }
 
