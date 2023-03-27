@@ -2,7 +2,21 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const {Shapes, Triangle, Square, Circle} = require('./lib/shapes')
 
-const makeSVG = () =>  {
+const makeSVG = (answers) =>  {
+    const triangleSVG = new Triangle(answers.textColour, answers.colour, answers.text);
+    const circleSVG = new Circle(answers.textColour, answers.colour, answers.text);
+    const squareSVG = new Square(answers.textColour, answers.colour, answers.text);
+    if (answers.shape === 'Triangle') {
+        console.log(triangleSVG);
+    }
+
+    if (answers.shape === 'Circle') {
+        console.log(circleSVG);
+    }
+
+    if (answers.shape === 'Square') {
+        console.log(squareSVG);
+    }
 
 }
 
@@ -10,7 +24,7 @@ const shapes = inquirer.prompt ([
     {
         type: 'input', 
         message: 'Write 3 charcters',
-        name: 'three',
+        name: 'text',
         validate: function(input) {
             if (input.length !== 3) {
                 return 'Please enter 3 characters'
@@ -23,7 +37,7 @@ const shapes = inquirer.prompt ([
     {
         type: 'input', 
         message: 'Enter a colour name or Hexadecimal for the text',
-        name: 'text-colour',
+        name: 'textColour',
         validate: function(input) {
             if (input.length === 0) {
                 return 'Please enter a colour'
@@ -54,8 +68,6 @@ const shapes = inquirer.prompt ([
         
     }
 
-]).then(answers => {
-    console.log (answers.three)
-})
+]).then(makeSVG)
 
 shapes;
