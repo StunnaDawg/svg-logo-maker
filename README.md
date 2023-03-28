@@ -25,6 +25,7 @@ Upon downloading the application make sure you do the following:
 ## Screenshot
 
 ![Screenshot](./images/prompt.png)
+![Alt](./examples/logo.svg)
 
 ## Demo
 Demo video link: https://watch.screencastify.com/v/OozwUt42Ln0QtsuXzcEa
